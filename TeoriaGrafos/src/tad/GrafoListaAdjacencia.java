@@ -187,7 +187,7 @@ public class GrafoListaAdjacencia {
 		
 		Vertice aux = getVertice(inicio);
 		
-		Vertice menor, v;
+		Vertice menor, vizinho;
 		aux.setDistancia(0);
 		double menorDistancia, dist;
 		
@@ -198,14 +198,14 @@ public class GrafoListaAdjacencia {
 			menor = null;
 			
 			for(Adjacente a: aux.getAdjacentes()){
-				v = a.getVertice();
+				vizinho = a.getVertice();
 				
 				dist = a.getPeso() + aux.getDistancia(); //Calcula a distância do vértice atual
-				if(v.getDistancia() > dist) v.setDistancia(dist); //Seta a distancia no vértice
+				if(vizinho.getDistancia() > dist) vizinho.setDistancia(dist); //Seta a distancia no vértice
 				
-				if(a.getPeso() + aux.getDistancia() < menorDistancia && !verticesPecorridos.contains(v)){
-					menorDistancia = a.getPeso() + aux.getDistancia();
-					menor = a.getVertice();
+				if(dist < menorDistancia && !verticesPecorridos.contains(vizinho)){
+					menorDistancia = dist;
+					menor = vizinho;
 				}
 			}
 			verticesPecorridos.add(menor); // Avança para o menor
